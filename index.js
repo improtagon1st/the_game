@@ -1,11 +1,16 @@
 const express = require("express");
 const axios = require("axios");
+const path = require("path");
+
 const app = express();
 
 const BOT_TOKEN = "8048948804:AAFiaAEP3ygSCLFjemn77sOnQBAJBqGxPwA"; // вставь сюда свой токен
 const CHAT_ID = "714588681";
 
 app.use(express.json());
+
+// 👉 Отдаём HTML из папки "public"
+app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/visit", async (req, res) => {
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -33,5 +38,7 @@ app.post("/visit", async (req, res) => {
   }
 });
 
-app.get("/", (_, res) => res.send("🟢 Server is alive"));
+// Можно оставить для проверки, что сервер жив
+app.get("/ping", (_, res) => res.send("🟢 Server is alive"));
+
 app.listen(process.env.PORT || 3000);
