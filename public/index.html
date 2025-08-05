@@ -37,16 +37,25 @@
   THE GAME HAS BEGUN
 
   <script>
-    // Отправка инфы о заходе на сервер
-    fetch("https://your-server.com/visit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ userAgent: navigator.userAgent, time: new Date().toISOString() })
-    }).catch(() => {
-      // Молча игнорируем ошибку
-    });
+    (async () => {
+      const info = {
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        screen: `${window.screen.width}x${window.screen.height}`,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        localTime: new Date().toString()
+      };
+
+      try {
+        await fetch("https://the_game.onrender.com/visit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(info)
+        });
+      } catch (e) {
+        // Ошибки отправки молча игнорируем
+      }
+    })();
   </script>
 </body>
 </html>
