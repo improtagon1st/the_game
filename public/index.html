@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Game Has Begun</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #00ffcc;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 3vw;
+      text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 20px #00ffaa;
+      animation: pulse 2s infinite alternate;
+      user-select: none;
+    }
+
+    @keyframes pulse {
+      from {
+        text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 20px #00ffaa;
+      }
+      to {
+        text-shadow: 0 0 1px #007766, 0 0 2px #005544;
+      }
+    }
+  </style>
+</head>
+<body>
+  THE GAME HAS BEGUN
+
+  <script>
+    // Отправка инфы о заходе на сервер
+    fetch("https://your-server.com/visit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ userAgent: navigator.userAgent, time: new Date().toISOString() })
+    }).catch(() => {
+      // Молча игнорируем ошибку
+    });
+  </script>
+</body>
+</html>
