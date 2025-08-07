@@ -1,11 +1,12 @@
+require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
 const path = require("path");
 
 const app = express();
 
-const BOT_TOKEN = "8048948804:AAFiaAEP3ygSCLFjemn77sOnQBAJBqGxPwA"; // вставь сюда свой токен
-const CHAT_ID = "714588681";
+const BOT_TOKEN = process.env.BOT_TOKEN 
+const CHAT_ID = process.env.CHAT_ID;
 
 app.use(express.json());
 
